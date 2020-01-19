@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>SURVEY WEB_APP SIH 2020</title>
+
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- firebase -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-database.js"></script>
+    <!-- firebaseUI -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/4.0.0/firebaseui.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyBsKR_KrFnZeayH0RzwFKs2yQd3yDdNiDQ",
+        authDomain: "survey-form-sih-2020.firebaseapp.com",
+        databaseURL: "https://survey-form-sih-2020.firebaseio.com",
+        projectId: "survey-form-sih-2020",
+        storageBucket: "survey-form-sih-2020.appspot.com",
+        messagingSenderId: "694874005037",
+        appId: "1:694874005037:web:4387b6d6f739e8afa322a4",
+        measurementId: "G-SYPEX3PSER"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+    <style>
+      #myDiv {
+        height: 300 !important ;
+        width: 500px !important ;
+      }
+      #myModal {
+        height: 90% !important ;
+        width: 80% !important ;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="navbar-fixed">
+      <nav class="#006064 cyan darken-4">
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo center">SURVEY WEB_APP SIH 2020</a>
+          <ul class="right hide-on-med-and-down">
+            <li>
+              <a href="https://ruchir-bisht-007.netlify.com/"
+                >About Devlopers</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.sih.gov.in/sih2020PS/MTA=/QWxs/QWxs/QWxs?page=2"
+                >About the Project</a
+              >
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+            <center><h2 class="modal-title">SURVEY RESULT</h2></center>
+          </div>
+          <div class="modal-body">
+            <div id="myDiv" width="100" height="100">
+              <!-- Plotly chart will be drawn inside this DIV -->
+            </div>
+            <p id="ratingTab1"></p>
+            <p id="ratingTab2"></p>
+            <p id="ratingTab3"></p>
+            <p id="ratingTab4"></p>
+            <p id="ratingTab5"></p>
+          </div>
+          <div class="modal-footer">
+            <b><h4 id="total_score"></h4></b>
+            <button type="button" class="btn btn-success" data-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <center>
+      <div id="loading" style="display: none;visibility: hidden;">
+        <img src="./images/loading1.gif" alt="Loading ... " />
+      </div>
+      <h2 id="display-name"></h2>
+      <h4 id="display-email"></h4>
+      <div id="login-form">
+        <div>
+          <div class="input-field col s3">
+            <input id="email" type="email" class="validate" />
+            <label for="email">Email</label>
+          </div>
+          <div class="input-field col s3">
+            <input id="password" type="password" class="validate" />
+            <label for="password">Password</label>
+          </div>
+        </div>
+        <button
+          class="btn waves-effect waves-red green"
+          id="sign_in"
+          onclick="{SignInWithEmailAndPassword()}"
+        >
+          Login
+        </button>
+      </div>
+      <br />
+      <div id="logout-form" style="display: none;visibility: hidden;">
+        <button
+          class="btn waves-effect waves-red"
+          id="sign_out"
+          style="display: none;visibility: hidden;"
+          onclick="{SignOutWithEmailAndPassword()}"
+        >
+          Logout
+        </button>
+      </div>
+      <br /><br />
+      <button
+        class="btn waves-effect waves-red"
+        id="transaction"
+        onclick="{show_results()}"
+        style="display: none;visibility: hidden;"
+      >
+        SHOW SURVEYS
+      </button>
+      <div id="all_transaction" style="display: none;visibility: hidden;">
+        <h3 id="device_ID"></h3>
+        <div id="list"></div>
+      </div>
+      <br /><br />
+      <div id="loading" style="display: none;visibility: hidden;">
+        <img src="./images/loading1.gif" alt="Loading ... " />
+      </div>
+    </center>
+    <!-- footer -->
+    <br /><br />
+    <footer class="page-footer #006064 cyan darken-4">
+      <div class="container">
+        <div class="row">
+          <div class="col l6 s12">
+            <h5 class="white-text">ABOUT THE TEAM</h5>
+            <p class="grey-text text-lighten-4">
+              DeathEaters_07
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">ABOUT THE Website</h5>
+            <ul>
+              <li>
+                <a class="grey-text text-lighten-3" href="#!"
+                  >TO OBSERVE THE SURVEYS</a
+                >
+              </li>
+              <li>
+                <a class="grey-text text-lighten-3" href="#!">DATA </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        <div class="container">
+          © 2019 Copyright TEAM MAIT
+          <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        </div>
+      </div>
+    </footer>
+    <script src="js/firebase_auth.js"></script>
+    <script src="js/transaction.js"></script>
+  </body>
+</html>
