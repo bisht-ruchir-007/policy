@@ -32,6 +32,8 @@ function show_results() {
           </span>
           <p><b>Total Rating</b> : ${doc.data().total_rating} / 25 </p>
           <p><b> YEAR:</b>${doc.data().year}<br><br>
+          <p><b> Location : Lat:</b>${doc.data().Lat}<br><br>
+          <p><b> Long:</b>${doc.data().Long}<br><br>
           <button
           class="btn-flat waves-effect waves-red"
           data-toggle="modal" 
@@ -60,6 +62,8 @@ function show_results() {
           </span>
           <p><b>Total Rating</b> : ${doc.data().total_rating} / 25 </p>
           <p><b> YEAR:</b>${doc.data().year}<br><br>
+          <p><b> Location : Lat:</b>${doc.data().Lat}<br><br>
+          <p><b> Long:</b>${doc.data().Long}<br><br>
           <button
           class="btn-flat waves-effect waves-red"
           data-toggle="modal" 
@@ -88,6 +92,8 @@ function show_results() {
           </span>
           <p><b>Total Rating</b> : ${doc.data().total_rating} / 25 </p>
           <p><b> YEAR:</b>${doc.data().year}<br><br>
+          <p><b> Location : Lat:</b>${doc.data().Lat}<br><br>
+          <p><b> Long:</b>${doc.data().Long}<br><br>
           <button
           class="btn-flat waves-effect waves-red"
           data-toggle="modal" 
