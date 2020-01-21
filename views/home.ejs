@@ -15,6 +15,26 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
+    <script
+      src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script
+      src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://js.api.here.com/v3/3.1/mapsjs-ui.css"
+    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -45,23 +65,15 @@
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
     </script>
-    <style>
-      #myDiv {
-        height: 300 !important ;
-        width: 500px !important ;
-      }
-      #myModal {
-        height: 90% !important ;
-        width: 80% !important ;
-      }
-    </style>
   </head>
 
   <body>
     <div class="navbar-fixed">
       <nav class="#006064 cyan darken-4">
         <div class="nav-wrapper">
-          <a href="#!" class="brand-logo center">SURVEY WEB_APP SIH 2020</a>
+          <a href="#!" class="brand-logo center"
+            ><h1>SURVEY WEB_APP SIH 2020</h1></a
+          >
           <ul class="right hide-on-med-and-down">
             <li>
               <a href="https://ruchir-bisht-007.netlify.com/"
@@ -89,9 +101,13 @@
             <center><h2 class="modal-title">SURVEY RESULT</h2></center>
           </div>
           <div class="modal-body">
-            <div id="myDiv" width="100" height="100">
-              <!-- Plotly chart will be drawn inside this DIV -->
-            </div>
+            <div id="myDiv" style="width:500px; height:500px;"></div>
+            <center>
+              <div
+                id="mapContainer"
+                style="width: 400px; height: 400px;display: none; visibility: hidden;"
+              ></div>
+            </center>
             <p id="ratingTab1"></p>
             <p id="ratingTab2"></p>
             <p id="ratingTab3"></p>

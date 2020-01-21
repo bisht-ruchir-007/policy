@@ -42,7 +42,8 @@ function show_results() {
           onclick="{Show_Data(${doc.data().total_rating},[${
             doc.data().rating1
           },${doc.data().rating2},
-            ${doc.data().rating3},${doc.data().rating4},${doc.data().rating5}])}
+            ${doc.data().rating3},${doc.data().rating4},${doc.data().rating5},
+            ${doc.data().Lat},${doc.data().Long}])}
           "
           >
           SHOW DATA
@@ -72,7 +73,8 @@ function show_results() {
           onclick="{Show_Data(${doc.data().total_rating},[${
             doc.data().rating1
           },${doc.data().rating2},
-            ${doc.data().rating3},${doc.data().rating4},${doc.data().rating5}])}
+            ${doc.data().rating3},${doc.data().rating4},${doc.data().rating5},
+            ${doc.data().Lat},${doc.data().Long}])}
           "
           >
           SHOW DATA
@@ -99,10 +101,10 @@ function show_results() {
           data-toggle="modal" 
           data-target="#myModal"
           id="data"
-          onclick="{Show_Data(${doc.data().total_rating},[${
-            doc.data().rating1
-          },${doc.data().rating2},
-            ${doc.data().rating3},${doc.data().rating4},${doc.data().rating5}])}
+          onclick="{Show_Data(${doc.data().total_rating},
+          [${doc.data().rating1},${doc.data().rating2},
+            ${doc.data().rating3},${doc.data().rating4},${doc.data().rating5},
+            ${doc.data().Lat},${doc.data().Long}])}
           "
           >
           SHOW DATA
@@ -119,7 +121,7 @@ function show_results() {
     });
 }
 
-function Show_Data(total_rating, rating) {
+function Show_Data(total_rating, rating, maptypes) {
   var xValue = ["Ques1", "Ques2", "Ques3", "Ques4", "Ques5"];
   var yValue = rating;
   var trace1 = {
@@ -141,6 +143,32 @@ function Show_Data(total_rating, rating) {
     title: "Survey Report",
     barmode: "stack"
   };
+  console.log("Lat" + rating[5]);
+  console.log("Long" + rating[6]);
+  document.getElementById("mapContainer").innerHTML = "";
+
+  // Initialize the platform object:
+  var platform = new H.service.Platform({
+    apikey: "8pqhOKQuSOSezebUCKJIPOugYgy694V6Oxk0kE7AfPw",
+    useCIT: true,
+    useHTTPS: true
+  });
+
+  // Obtain the default map types from the platform object
+  var maptypes = platform.createDefaultLayers();
+  // Instantiate (and display) a map object:
+  var map = new H.Map(
+    document.getElementById("mapContainer"),
+    maptypes.vector.normal.map,
+    {
+      zoom: 10,
+      center: { lng: parseFloat("77.30"), lat: parseFloat("28.621") }
+    }
+  );
+
+  map.draggable = true;
+
+  var ui = H.ui.UI.createDefault(map, maptypes);
 
   Plotly.newPlot("myDiv", data, layout);
 

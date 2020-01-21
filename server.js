@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger("dev"));
 
 const config = {
-  apiKey: "AIzaSyC8uQu-VaVbp_HOu_0zvLX6KPILJ-trrck",
+  apiKey: process.env.firebaseApiKey,
   authDomain: "smart-wallet-780f4.firebaseapp.com",
   databaseURL: "https://smart-wallet-780f4.firebaseio.com",
   projectId: "smart-wallet-780f4",
